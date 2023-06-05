@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SettingsViewController.swift
 //  ColorizedApp
 //
 //  Created by Shamkhan Mutuskhanov on 17.05.2023.
@@ -7,11 +7,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class SettingsViewController: UIViewController {
     
     // MARK: - IBOutlets
-
-    
     @IBOutlet var redSlider: UISlider!
     @IBOutlet var greenSlider: UISlider!
     @IBOutlet var blueSlider: UISlider!
@@ -24,32 +22,16 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        redSliderAction()
-        greenSliderAction()
-        blueSliderAction()
-
+        rgbSliderActions()
         rgbView.layer.cornerRadius = 30.0
     }
     
     // MARK: - IBActions
-    @IBAction func redSliderAction() {
-//        redCountLabel.text = String(format: "%.2f", redSlider.value)
+    @IBAction func rgbSliderActions() {
+//      redCountLabel.text = String(format: "%.2f", redSlider.value)
         redSlider.tintColor = .red
-        
-        updateRGBViewColor()
-    }
-    
-    @IBAction func greenSliderAction() {
-       
-        greenSlider.tintColor = .green
-        
-        updateRGBViewColor()
-    }
-    
-    @IBAction func blueSliderAction() {
-       
         blueSlider.tintColor = .blue
+        greenSlider.tintColor = .green
         
         updateRGBViewColor()
     }
