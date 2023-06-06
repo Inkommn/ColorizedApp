@@ -7,9 +7,7 @@
 
 import UIKit
 
-
 final class SettingsViewController: UIViewController {
-    
     // MARK: - IBOutlets
     @IBOutlet var rgbView: UIView!
     
@@ -27,13 +25,14 @@ final class SettingsViewController: UIViewController {
     
     var delegate: SettingsViewControllerDelegate!
     
-    
-    
+    var initialColor: UIColor!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         rgbSlidersAction()
         rgbView.layer.cornerRadius = 15.0
+
+        
     }
     
     // MARK: - IBActions
@@ -41,32 +40,40 @@ final class SettingsViewController: UIViewController {
         redSlider.tintColor = .red
         blueSlider.tintColor = .blue
         greenSlider.tintColor = .green
-        
         updateRGBViewColor()
         rgbCountLabels()
     }
     
     @IBAction func doneButtonDidTapped() {
+        delegate.setColors(rgbView.backgroundColor ?? UIColor.label)
         dismiss(animated: true)
+        
     }
     
-      func rgbCountLabels() {
+    // MARK: - Public methods
+    func rgbCountLabels() {
         redCountLabel.text = String(format: "%.2f", redSlider.value)
         greenCountLabel.text = String(format: "%.2f", greenSlider.value)
         blueCountLabel.text = String(format: "%.2f", blueSlider.value)
     }
     
     // MARK: - Private methods
-     private func updateRGBViewColor() {
-         rgbView.backgroundColor = UIColor(
-             red: (CGFloat(redSlider.value)),
-             green: (CGFloat(greenSlider.value)),
-             blue: (CGFloat(blueSlider.value)),
-             alpha: 1
-         )
+    private func updateRGBViewColor() {
+        if let color = initialColor {
+            rgbView.backgroundColor = color
+            initialColor = nil
+        } else {
+            rgbView.backgroundColor = UIColor(
+                red: (CGFloat(redSlider.value)),
+                green: (CGFloat(greenSlider.value)),
+                blue: (CGFloat(blueSlider.value)),
+                alpha: 1
+            )
+        }
     }
 }
-    
+
+
     
 
 
