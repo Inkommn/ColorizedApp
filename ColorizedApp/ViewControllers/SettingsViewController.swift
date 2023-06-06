@@ -25,14 +25,10 @@ final class SettingsViewController: UIViewController {
     
     var delegate: SettingsViewControllerDelegate!
     
-    var initialColor: UIColor!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         rgbSlidersAction()
         rgbView.layer.cornerRadius = 15.0
-
-        
     }
     
     // MARK: - IBActions
@@ -45,7 +41,7 @@ final class SettingsViewController: UIViewController {
     }
     
     @IBAction func doneButtonDidTapped() {
-        delegate.setColors(rgbView.backgroundColor ?? UIColor.label)
+        delegate.setColors(backgroundColor ?? UIColor.label)
         dismiss(animated: true)
         
     }
@@ -59,21 +55,12 @@ final class SettingsViewController: UIViewController {
     
     // MARK: - Private methods
     private func updateRGBViewColor() {
-        if let color = initialColor {
-            rgbView.backgroundColor = color
-            initialColor = nil
-        } else {
-            rgbView.backgroundColor = UIColor(
-                red: (CGFloat(redSlider.value)),
-                green: (CGFloat(greenSlider.value)),
-                blue: (CGFloat(blueSlider.value)),
-                alpha: 1
-            )
-        }
+        rgbView.backgroundColor = backgroundColor
+        backgroundColor = UIColor(
+            red: (CGFloat(redSlider.value)),
+            green: (CGFloat(greenSlider.value)),
+            blue: (CGFloat(blueSlider.value)),
+            alpha: 1
+        )
     }
 }
-
-
-    
-
-
