@@ -25,6 +25,9 @@ final class SettingsViewController: UIViewController {
     
     var delegate: SettingsViewControllerDelegate!
     
+    var initialColor: UIColor!
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         rgbSlidersAction()
@@ -36,12 +39,14 @@ final class SettingsViewController: UIViewController {
         redSlider.tintColor = .red
         blueSlider.tintColor = .blue
         greenSlider.tintColor = .green
+
         updateRGBViewColor()
+        
         rgbCountLabels()
     }
     
     @IBAction func doneButtonDidTapped() {
-        delegate.setColors(backgroundColor ?? UIColor.label)
+        delegate.setColors(initialColor)
         dismiss(animated: true)
         
     }
@@ -55,8 +60,8 @@ final class SettingsViewController: UIViewController {
     
     // MARK: - Private methods
     private func updateRGBViewColor() {
-        rgbView.backgroundColor = backgroundColor
-        backgroundColor = UIColor(
+        rgbView.backgroundColor = initialColor
+        initialColor = UIColor(
             red: (CGFloat(redSlider.value)),
             green: (CGFloat(greenSlider.value)),
             blue: (CGFloat(blueSlider.value)),
