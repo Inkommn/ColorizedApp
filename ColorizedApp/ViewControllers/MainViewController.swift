@@ -31,6 +31,7 @@ final class MainViewController: UIViewController {
         settingsVC.greenSliderValue = greenSliderValue
         settingsVC.blueSliderValue = blueSliderValue
         
+        settingsVC.initialColor = initialColor
         settingsVC.delegate = self
         
     }
