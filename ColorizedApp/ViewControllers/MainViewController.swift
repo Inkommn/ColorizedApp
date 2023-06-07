@@ -7,11 +7,19 @@
 
 import UIKit
 
-protocol SettingsViewControllerDelegate {
-    func setColors(_ color: UIColor)
+protocol SettingsViewControllerDelegate: AnyObject {
+    func updateColor(_ color: UIColor, _ red: Float, _ green: Float, _ blue: Float)
 }
 
 final class MainViewController: UIViewController {
+    // MARK: - Public Properties
+    var initialColor: UIColor!
+    
+    var redSliderValue: Float = 1.0
+    var greenSliderValue: Float = 1.0
+    var blueSliderValue: Float = 1.0
+    
+    
     // MARK: - UiViewController
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,15 +27,28 @@ final class MainViewController: UIViewController {
        
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let settingsVC = segue.destination as? SettingsViewController else { return }
+        settingsVC.redSliderValue = redSliderValue
+        settingsVC.greenSliderValue = greenSliderValue
+        settingsVC.blueSliderValue = blueSliderValue
+        
         settingsVC.delegate = self
-        settingsVC.initialColor = self.view.backgroundColor
         
     }
 }
 
     // MARK: - SettingsViewControllerDelegate
 extension MainViewController: SettingsViewControllerDelegate {
-    func setColors(_ color: UIColor) {
-        self.view.backgroundColor = color
+    func updateColor(_ color: UIColor, _ red: Float, _ green: Float, _ blue: Float) {
+        redSliderValue = red
+        greenSliderValue = green
+        blueSliderValue = blue
+        
+        initialColor = self.view.backgroundColor
+        initialColor = color
+        self.view.backgroundColor = UIColor(
+            red: CGFloat(red),
+            green: CGFloat(green),
+            blue: CGFloat(blue), alpha: 1
+        )
     }
 }
