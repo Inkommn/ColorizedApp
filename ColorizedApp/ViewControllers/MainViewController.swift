@@ -13,8 +13,6 @@ protocol SettingsViewControllerDelegate: AnyObject {
 
 final class MainViewController: UIViewController {
     // MARK: - Public Properties
-    var initialColor: UIColor!
-    
     var redSliderValue: Float = 1.0
     var greenSliderValue: Float = 1.0
     var blueSliderValue: Float = 1.0
@@ -31,7 +29,7 @@ final class MainViewController: UIViewController {
         settingsVC.greenSliderValue = greenSliderValue
         settingsVC.blueSliderValue = blueSliderValue
         
-        settingsVC.initialColor = initialColor
+        settingsVC.initialColor = self.view.backgroundColor
         settingsVC.delegate = self
         
     }
@@ -44,8 +42,6 @@ extension MainViewController: SettingsViewControllerDelegate {
         greenSliderValue = green
         blueSliderValue = blue
         
-        initialColor = self.view.backgroundColor
-        initialColor = color
         self.view.backgroundColor = UIColor(
             red: CGFloat(red),
             green: CGFloat(green),
@@ -53,3 +49,5 @@ extension MainViewController: SettingsViewControllerDelegate {
         )
     }
 }
+
+
