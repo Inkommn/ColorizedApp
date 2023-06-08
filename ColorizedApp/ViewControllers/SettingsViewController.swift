@@ -106,6 +106,8 @@ final class SettingsViewController: UIViewController {
     }
     
     @objc private func keyboardDoneButtonSetup() {
+        view.endEditing(true)
+        
         let flexibleSpace = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
             target: nil,
@@ -145,8 +147,6 @@ final class SettingsViewController: UIViewController {
             forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil)
         { notification in self.keyboardWillHide(sender: notification) }
     }
-    
-
 }
 
 // MARK: - UITextFieldDelegate
